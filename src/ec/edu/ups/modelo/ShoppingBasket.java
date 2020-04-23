@@ -11,7 +11,8 @@ import java.util.Set;
  * un sistema que permite ejemplificar el uso del patrón de diseño DAO para la
  * persistencia de datos
  * 
- * @author Gabriel A. León Paredes Doctor en Tecnologías de Información
+ * @author Gabriel A. León Paredes 
+ * 	       Doctor en Tecnologías de Información
  *         https://www.linkedin.com/in/gabrielleonp
  * @version 1.0
  */
