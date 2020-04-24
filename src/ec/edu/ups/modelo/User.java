@@ -10,8 +10,8 @@ import java.io.Serializable;
  * de datos
  * 
  * @author Gabriel A. León Paredes 
- * 		   Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
  * @version 1.0
  */
 public class User implements Serializable {
@@ -25,10 +25,18 @@ public class User implements Serializable {
 	private String name;
 	private String password;
 	private int level;
-	private User user;
+	private UserDetail detail;
 
 	public User() {
 
+	}
+
+	public User(int id, int level, String name, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.level = level;
 	}
 
 	// Generamos los getters y setters de sus atributos
@@ -64,19 +72,19 @@ public class User implements Serializable {
 		this.level = level;
 	}
 
-	public User getUser() {
-		return user;
+	public UserDetail getDetail() {
+		return detail;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setDetail(UserDetail detail) {
+		this.detail = detail;
 	}
 
 	// Método toString que nos permite describir a un objeto
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", level=" + level + ", user=" + user
-				+ "]";
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", level=" + level + ", detail="
+				+ detail + "]";
 	}
 
 }

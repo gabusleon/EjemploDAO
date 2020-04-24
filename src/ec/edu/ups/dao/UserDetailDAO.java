@@ -20,5 +20,7 @@ import ec.edu.ups.modelo.UserDetail;
  *
  */
 public interface UserDetailDAO extends GenericDAO<UserDetail, Integer> {
-
+	
+	public abstract UserDetail findByUserId(Integer userId);
+	
 }

@@ -10,8 +10,8 @@ import java.io.Serializable;
  * persistencia de datos
  * 
  * @author Gabriel A. León Paredes 
- * 		   Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
  * @version 1.0
  */
 public class Category implements Serializable {
@@ -27,6 +27,13 @@ public class Category implements Serializable {
 
 	public Category() {
 
+	}
+
+	public Category(int id, String name, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
 	}
 
 	// Generamos los getters y setters de sus atributos
