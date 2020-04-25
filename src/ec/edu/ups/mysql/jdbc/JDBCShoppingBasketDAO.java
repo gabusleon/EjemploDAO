@@ -56,7 +56,7 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 		if (shoppingBasket == null) {
 			return null;
 		}
-		Set<Product> products = DAOFactory.getFactory().getProductDAO().findByShoppingBasketId(shoppingBasket.getId());
+		List<Product> products = DAOFactory.getFactory().getProductDAO().findByShoppingBasketId(shoppingBasket.getId());
 		if (products != null) {
 			Set<Product> productsFinal = new HashSet<Product>();
 			for (Product product : products) {
@@ -73,7 +73,7 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 	public void update(ShoppingBasket shoppingBasket) {
 
 		ProductDAO productDAO = DAOFactory.getFactory().getProductDAO();
-		Set<Product> products = productDAO.findByShoppingBasketId(shoppingBasket.getId());
+		List<Product> products = productDAO.findByShoppingBasketId(shoppingBasket.getId());
 		jdbc.update("UPDATE User Shopping_Basket date = '" + shoppingBasket.getDate() + " WHERE id = "
 				+ shoppingBasket.getId());
 
@@ -113,7 +113,7 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(rs.getDate("date"));
 				ShoppingBasket shoppingBasket = new ShoppingBasket(rs.getInt("id"), calendar);
-				Set<Product> products = DAOFactory.getFactory().getProductDAO()
+				List<Product> products = DAOFactory.getFactory().getProductDAO()
 						.findByShoppingBasketId(shoppingBasket.getId());
 
 				if (products != null) {
