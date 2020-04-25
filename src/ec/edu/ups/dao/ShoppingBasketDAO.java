@@ -1,8 +1,5 @@
 package ec.edu.ups.dao;
 
-import java.util.Set;
-
-import ec.edu.ups.modelo.Product;
 import ec.edu.ups.modelo.ShoppingBasket;
 
 /**
@@ -24,5 +21,5 @@ import ec.edu.ups.modelo.ShoppingBasket;
  *
  */
 public interface ShoppingBasketDAO extends GenericDAO<ShoppingBasket, Integer> {
-	
+
 }

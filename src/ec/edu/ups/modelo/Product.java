@@ -28,6 +28,13 @@ public class Product implements Serializable {
 
 	public Product() {
 
+	}	
+
+	public Product(int id, int amount, String description) {
+		super();
+		this.id = id;
+		this.amount = amount;
+		this.description = description;
 	}
 
 	// Generamos los getters y setters de sus atributos

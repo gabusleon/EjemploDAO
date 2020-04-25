@@ -44,6 +44,12 @@ public class JDBCUserDAO extends JDBCGenericDAO<User, Integer> implements UserDA
 		try {
 			if (rs != null && rs.next()) {
 				user = new User(rs.getInt("id"), rs.getInt("level"), rs.getString("name"), rs.getString("password"));
+				UserDetail detail = DAOFactory.getFactory().getUserDetailDAO().findByUserId(user.getId());
+				if (detail != null) {
+					user.setDetail(detail);
+					// detail.setUser(user);
+				}
+
 			}
 		} catch (SQLException e) {
 			System.out.println(">>>WARNING (JDBCUserDAO:read): " + e.getMessage());
@@ -51,12 +57,6 @@ public class JDBCUserDAO extends JDBCGenericDAO<User, Integer> implements UserDA
 		if (user == null) {
 			return null;
 		}
-		UserDetail detail = DAOFactory.getFactory().getUserDetailDAO().findByUserId(user.getId());
-		if (detail != null) {
-			detail.setUser(user);
-		}
-		user.setDetail(detail);
-
 		return user;
 	}
 
