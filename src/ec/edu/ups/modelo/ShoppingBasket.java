@@ -30,6 +30,14 @@ public class ShoppingBasket implements Serializable {
 	public ShoppingBasket() {
 
 	}
+		
+
+	public ShoppingBasket(int id, Calendar date) {
+		super();
+		this.id = id;
+		this.date = date;
+	}
+
 
 	// Generamos los getters y setters de sus atributos
 	public int getId() {

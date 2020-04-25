@@ -1,5 +1,7 @@
 package ec.edu.ups.dao;
 
+import java.util.Set;
+
 import ec.edu.ups.modelo.Product;
 
 /**
@@ -20,5 +22,7 @@ import ec.edu.ups.modelo.Product;
  *
  */
 public interface ProductDAO extends GenericDAO<Product, Integer> {
-
+	
+	public abstract Set<Product> findByShoppingBasketId(int idShoppingBasket);
+	
 }

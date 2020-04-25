@@ -1,52 +1,128 @@
 package ec.edu.ups.mysql.jdbc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import ec.edu.ups.dao.DAOFactory;
+import ec.edu.ups.dao.UserDAO;
 import ec.edu.ups.dao.UserDetailDAO;
+import ec.edu.ups.modelo.User;
 import ec.edu.ups.modelo.UserDetail;
 
 public class JDBCUserDetailDAO extends JDBCGenericDAO<UserDetail, Integer> implements UserDetailDAO {
 
 	@Override
 	public void createTable() {
-		// TODO Auto-generated method stub
-		
+
+		jdbc.update("DROP TABLE IF EXISTS UserDetail");
+		jdbc.update("DROP TABLE IF EXISTS User");
+		DAOFactory.getFactory().getUserDAO().createTable();
+		jdbc.update("CREATE TABLE UserDetail (" + "ID INT NOT NULL, DETAIL STRING, "
+				+ "USER_ID INT, PRIMARY KEY (ID), FOREIGN KEY(USER_ID) REFERENCES User(ID))");
 	}
 
 	@Override
-	public void create(UserDetail entity) {
-		// TODO Auto-generated method stub
-		
+	public void create(UserDetail userDetail) {
+		if (userDetail.getUser() != null) {
+			User user = DAOFactory.getFactory().getUserDAO().read(userDetail.getUser().getId());
+			if (user == null) {
+				DAOFactory.getFactory().getUserDAO().create(userDetail.getUser());
+			}
+			jdbc.update("INSERT UserDetail VALUES (" + userDetail.getId() + ", '" + userDetail.getDetail() + "', "
+					+ userDetail.getUser().getId() + ")");
+		}
+
 	}
 
 	@Override
 	public UserDetail read(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		UserDetail detail = null;
+		ResultSet rs = jdbc.query("SELECT * FROM UserDetail WHERE id=" + id);
+		try {
+			if (rs != null && rs.next()) {
+				detail = new UserDetail(rs.getInt("id"), rs.getString("detail"));
+				User user = DAOFactory.getFactory().getUserDAO().read(rs.getInt("user_id"));
+				user.setDetail(detail);
+				detail.setUser(user);
+			}
+		} catch (SQLException e) {
+			System.out.println(">>>WARNING (JDBCUserDetailDAO:read): " + e.getMessage());
+		}
+		if (detail == null) {
+			return null;
+		}
+		return detail;
+
 	}
 
 	@Override
-	public void update(UserDetail entity) {
-		// TODO Auto-generated method stub
-		
+	public void update(UserDetail userDetail) {
+		UserDAO userDAO = DAOFactory.getFactory().getUserDAO();
+		User user = userDAO.read(userDetail.getUser().getId());
+
+		jdbc.update("UPDATE UserDetail SET detail = '" + userDetail.getDetail() + " WHERE id = " + userDetail.getId());
+
+		if (userDetail.getUser() == null && user != null) {
+			this.delete(userDetail);
+			userDAO.delete(user);
+		} else if (userDetail.getUser() != null && user == null) {
+			userDAO.create(userDetail.getUser());
+			this.create(userDetail);
+		} else if (userDetail.getUser() != null && user != null) {
+			userDAO.update(userDetail.getUser());
+		}
 	}
 
 	@Override
-	public void delete(UserDetail entity) {
-		// TODO Auto-generated method stub
-		
+	public void delete(UserDetail userDetail) {
+
+		jdbc.update("DELETE FROM UserDetail WHERE id = " + userDetail.getId());
+		if (userDetail.getUser() != null) {
+			DAOFactory.getFactory().getUserDAO().delete(userDetail.getUser());
+		}
+
 	}
 
 	@Override
 	public List<UserDetail> find() {
-		// TODO Auto-generated method stub
-		return null;
+		List<UserDetail> list = new ArrayList<UserDetail>();
+		ResultSet rs = jdbc.query("SELECT * FROM UserDetail");
+		try {
+			while (rs.next()) {
+				UserDetail detail = new UserDetail(rs.getInt("id"), rs.getString("detail"));
+				User user = DAOFactory.getFactory().getUserDAO().read(rs.getInt("user_id"));
+				user.setDetail(detail);
+				detail.setUser(user);
+				list.add(detail);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(">>>WARNING (JDBCUserDetailDAO:find): " + e.getMessage());
+		}
+		return list;
 	}
 
 	@Override
 	public UserDetail findByUserId(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDetail detail = null;
+		ResultSet rs = jdbc.query("SELECT * FROM UserDetail WHERE user_id=" + userId);
+		try {
+			if (rs != null && rs.next()) {
+				detail = new UserDetail(rs.getInt("id"), rs.getString("detail"));
+				User user = DAOFactory.getFactory().getUserDAO().read(userId);
+				user.setDetail(detail);
+				detail.setUser(user);
+			}
+		} catch (SQLException e) {
+			System.out.println(">>>WARNING (JDBCUserDetailDAO:findByUserId): " + e.getMessage());
+		}
+		if (detail == null) {
+			return null;
+		}
+		return detail;
 	}
 
 }

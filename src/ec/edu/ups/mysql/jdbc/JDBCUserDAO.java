@@ -20,6 +20,7 @@ public class JDBCUserDAO extends JDBCGenericDAO<User, Integer> implements UserDA
 		jdbc.update("DROP TABLE IF EXISTS User");
 		jdbc.update("CREATE TABLE User (" + "ID INT NOT NULL, LEVEL INT, "
 				+ "NAME VARCHAR(255), PASSWORD VARCHAR(255), PRIMARY KEY (ID))");
+		DAOFactory.getFactory().getUserDetailDAO().createTable();
 
 	}
 
@@ -49,13 +50,12 @@ public class JDBCUserDAO extends JDBCGenericDAO<User, Integer> implements UserDA
 		}
 		if (user == null) {
 			return null;
-		} else {
-			UserDetail detail = DAOFactory.getFactory().getUserDetailDAO().findByUserId(user.getId());
-			if (detail != null) {
-				detail.setUser(user);
-				user.setDetail(detail);
-			}
 		}
+		UserDetail detail = DAOFactory.getFactory().getUserDetailDAO().findByUserId(user.getId());
+		if (detail != null) {
+			detail.setUser(user);
+		}
+		user.setDetail(detail);
 
 		return user;
 	}
