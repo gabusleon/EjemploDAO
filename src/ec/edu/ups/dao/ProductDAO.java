@@ -1,6 +1,6 @@
 package ec.edu.ups.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import ec.edu.ups.modelo.Product;
 
@@ -16,13 +16,12 @@ import ec.edu.ups.modelo.Product;
  * Además, en esta interface se pueden agregar método específicos para el manejo
  * del objeto Product, por ejemplo: buscarProductPorDescripction entre otras.
  * 
- * @author Gabriel A. León Paredes 
- * Doctor en Tecnologías de Información
- * https://www.linkedin.com/in/gabrielleonp
+ * @author Gabriel A. León Paredes Doctor en Tecnologías de Información
+ *         https://www.linkedin.com/in/gabrielleonp
  *
  */
 public interface ProductDAO extends GenericDAO<Product, Integer> {
-	
-	public abstract List<Product> findByShoppingBasketId(int shoppingBasketId);
-	
+
+	public abstract Set<Product> findByShoppingBasketId(int shoppingBasketId);
+
 }

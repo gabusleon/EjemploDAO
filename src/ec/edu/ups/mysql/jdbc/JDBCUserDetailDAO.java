@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-xs
+
 import ec.edu.ups.dao.UserDetailDAO;
 import ec.edu.ups.modelo.User;
 import ec.edu.ups.modelo.UserDetail;

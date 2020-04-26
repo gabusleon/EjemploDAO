@@ -2,6 +2,7 @@ package ec.edu.ups.mysql.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,17 +21,21 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 	@Override
 	public void createTable() {
 
-		jdbc.update("DROP TABLE IF EXISTS Product");
-		jdbc.update("DROP TABLE IF EXISTS Shopping_Basket");
-		jdbc.update("CREATE TABLE Shopping_Basket ( ID INT NOT NULL, DATE DATE, PRIMARY KEY (ID))");
+		conexionUno.update("DROP TABLE IF EXISTS Product");
+		conexionUno.update("DROP TABLE IF EXISTS Shopping_Basket");
+		conexionUno.update("CREATE TABLE Shopping_Basket ( ID INT NOT NULL, DATE DATE, PRIMARY KEY (ID))");
 		DAOFactory.getFactory().getProductDAO().createTable();
 
 	}
 
 	@Override
 	public void create(ShoppingBasket shoppingBasket) {
-		jdbc.update(
-				"INSERT ShoppingBasket VALUES (" + shoppingBasket.getId() + ", '" + shoppingBasket.getDate() + "')");
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("INSERT Shopping_Basket VALUES (" + shoppingBasket.getId() + ", '"
+				+ formato.format(shoppingBasket.getDate().getTime()) + "')");
+
+		conexionUno.update("INSERT Shopping_Basket VALUES (" + shoppingBasket.getId() + ", '"
+				+ formato.format(shoppingBasket.getDate().getTime()) + "')");
 		Set<Product> products = shoppingBasket.getProducts();
 		if (products != null) {
 			for (Product product : products) {
@@ -43,7 +48,7 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 	@Override
 	public ShoppingBasket read(Integer id) {
 		ShoppingBasket shoppingBasket = null;
-		ResultSet rs = jdbc.query("SELECT * FROM Shopping_Basket WHERE id=" + id);
+		ResultSet rs = conexionUno.query("SELECT * FROM Shopping_Basket WHERE id=" + id);
 		try {
 			if (rs != null && rs.next()) {
 				Calendar calendar = new GregorianCalendar();
@@ -56,7 +61,7 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 		if (shoppingBasket == null) {
 			return null;
 		}
-		List<Product> products = DAOFactory.getFactory().getProductDAO().findByShoppingBasketId(shoppingBasket.getId());
+		Set<Product> products = DAOFactory.getFactory().getProductDAO().findByShoppingBasketId(shoppingBasket.getId());
 		if (products != null) {
 			Set<Product> productsFinal = new HashSet<Product>();
 			for (Product product : products) {
@@ -73,8 +78,8 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 	public void update(ShoppingBasket shoppingBasket) {
 
 		ProductDAO productDAO = DAOFactory.getFactory().getProductDAO();
-		List<Product> products = productDAO.findByShoppingBasketId(shoppingBasket.getId());
-		jdbc.update("UPDATE User Shopping_Basket date = '" + shoppingBasket.getDate() + " WHERE id = "
+		Set<Product> products = productDAO.findByShoppingBasketId(shoppingBasket.getId());
+		conexionUno.update("UPDATE User Shopping_Basket date = '" + shoppingBasket.getDate() + " WHERE id = "
 				+ shoppingBasket.getId());
 
 		if (shoppingBasket.getProducts() == null && products != null) {
@@ -100,30 +105,33 @@ public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Intege
 				DAOFactory.getFactory().getProductDAO().delete(products);
 			}
 		}
-		jdbc.update("DELETE FROM Shopping_Basket WHERE id = " + shoppingBasket.getId());
+		conexionUno.update("DELETE FROM Shopping_Basket WHERE id = " + shoppingBasket.getId());
 
 	}
 
 	@Override
 	public List<ShoppingBasket> find() {
 		List<ShoppingBasket> list = new ArrayList<ShoppingBasket>();
-		ResultSet rs = jdbc.query("SELECT * FROM Shopping_Basket");
+		ResultSet rs = conexionUno.query("SELECT * FROM Shopping_Basket");
 		try {
 			while (rs.next()) {
 				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(rs.getDate("date"));
 				ShoppingBasket shoppingBasket = new ShoppingBasket(rs.getInt("id"), calendar);
-				List<Product> products = DAOFactory.getFactory().getProductDAO()
-						.findByShoppingBasketId(shoppingBasket.getId());
+				Set<Product> products = DAOFactory.getFactory().getProductDAO()
+						.findByShoppingBasketId(shoppingBasket.getId());				
 
 				if (products != null) {
+
 					Set<Product> productsFinal = new HashSet<Product>();
 					for (Product product : products) {
 						product.setShoppingBasket(shoppingBasket);
 						productsFinal.add(product);
 					}
 					shoppingBasket.setProducts(productsFinal);
+
 				}
+
 				list.add(shoppingBasket);
 			}
 
