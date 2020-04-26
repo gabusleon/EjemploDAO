@@ -22,7 +22,7 @@ public class ContextJDBC {
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/db_test";
 	private static final String USER = "root";
-	private static final String PASS = "gleon.123@";
+	private static final String PASS = "";
 	private static ContextJDBC jdbc1 = null;
 	private static ContextJDBC jdbc2 = null;
 	private Statement statement = null;
