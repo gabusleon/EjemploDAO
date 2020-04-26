@@ -12,21 +12,21 @@ public class JDBCCategoryDAO extends JDBCGenericDAO<Category, Integer> implement
 
 	@Override
 	public void createTable() {
-		jdbc.update("DROP TABLE IF EXISTS Category");
-		jdbc.update("CREATE TABLE Category (" + "ID INT NOT NULL, " + "DESCRIPTION VARCHAR(255), "
+		conexionUno.update("DROP TABLE IF EXISTS Category");
+		conexionUno.update("CREATE TABLE Category (" + "ID INT NOT NULL, " + "DESCRIPTION VARCHAR(255), "
 				+ "NAME VARCHAR(255), " + "PRIMARY KEY (ID))");
 	}
 
 	@Override
 	public void create(Category category) {
-		jdbc.update("INSERT Category VALUES (" + category.getId() + ", '" + category.getName() + "', '"
+		conexionUno.update("INSERT Category VALUES (" + category.getId() + ", '" + category.getName() + "', '"
 				+ category.getDescription() + "')");
 	}
 
 	@Override
 	public Category read(Integer id) {
 		Category category = null;
-		ResultSet rs = jdbc.query("SELECT * FROM Category WHERE id=" + id);
+		ResultSet rs = conexionUno.query("SELECT * FROM Category WHERE id=" + id);
 		try {
 			if (rs != null && rs.next()) {
 				category = new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description"));
@@ -40,21 +40,21 @@ public class JDBCCategoryDAO extends JDBCGenericDAO<Category, Integer> implement
 
 	@Override
 	public void update(Category category) {
-		jdbc.update("UPDATE Category SET name = '" + category.getName() + "', description = '"
+		conexionUno.update("UPDATE Category SET name = '" + category.getName() + "', description = '"
 				+ category.getDescription() + "' WHERE id = " + category.getId());
 
 	}
 
 	@Override
 	public void delete(Category category) {
-		jdbc.update("DELETE FROM Category WHERE id = " + category.getId());
+		conexionUno.update("DELETE FROM Category WHERE id = " + category.getId());
 
 	}
 
 	@Override
 	public List<Category> find() {
 		List<Category> list = new ArrayList<Category>();
-		ResultSet rs = jdbc.query("SELECT * FROM Category");
+		ResultSet rs = conexionUno.query("SELECT * FROM Category");
 		try {
 			while (rs.next()) {
 				list.add(new Category(rs.getInt("id"), rs.getString("name"), rs.getString("description")));

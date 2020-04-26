@@ -14,17 +14,17 @@ import java.sql.Statement;
  * Singleton. Ademásm crea los métodos para poder enviar sentencias SQL como
  * INSERT, DELETE, UPDATE y SELECT.
  * 
- * @author Gabriel A. León Paredes 
- * Doctor en Tecnologías de Información
- * https://www.linkedin.com/in/gabrielleonp
+ * @author Gabriel A. León Paredes Doctor en Tecnologías de Información
+ *         https://www.linkedin.com/in/gabrielleonp
  *
  */
 public class ContextJDBC {
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/db_test";
 	private static final String USER = "root";
-	private static final String PASS = "";
-	private static ContextJDBC jdbc = null;
+	private static final String PASS = "gleon.123@";
+	private static ContextJDBC jdbc1 = null;
+	private static ContextJDBC jdbc2 = null;
 	private Statement statement = null;
 
 	public ContextJDBC() {
@@ -42,9 +42,9 @@ public class ContextJDBC {
 			Connection connection = DriverManager.getConnection(URL, USER, PASS);
 			this.statement = connection.createStatement();
 		} catch (ClassNotFoundException e) {
-			System.out.println(">>>WARNING (JDBC:connect)...problemas con el driver");
+			System.out.println(">>>WARNING (JDBC:connect)...problemas con el driver\n" + e.getMessage());
 		} catch (SQLException e) {
-			System.out.println(">>>WARNING (JDBC:connect)...problemas con la BD");
+			System.out.println(">>>WARNING (JDBC:connect)...problemas con la BD\n" + e.getMessage());
 		}
 	}
 
@@ -85,13 +85,31 @@ public class ContextJDBC {
 	 * 
 	 * @return jdbc
 	 */
-	protected static ContextJDBC getJDBC() {
+	protected static ContextJDBC getJDBC1() {
 		// creación de la conexión a la base de datos solo si no ha sido creada patrón
 		// de diseño singleton
-		if (jdbc == null) {
-			jdbc = new ContextJDBC();
+		if (jdbc1 == null) {
+			jdbc1 = new ContextJDBC();
 		}
-		return jdbc;
+		return jdbc1;
+
+	}
+
+	/**
+	 * Método getJDBC.
+	 * 
+	 * Obtiene una conexión activa a la base de datos
+	 * 
+	 * @return jdbc
+	 */
+	protected static ContextJDBC getJDBC2() {
+		// creación de la conexión a la base de datos solo si no ha sido creada patrón
+		// de diseño singleton
+		if (jdbc2 == null) {
+			jdbc2 = new ContextJDBC();
+		}
+		return jdbc2;
+
 	}
 
 }

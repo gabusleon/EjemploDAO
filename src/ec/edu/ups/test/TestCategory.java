@@ -17,17 +17,21 @@ public class TestCategory {
 		categoryDAO.create(c1);
 		categoryDAO.create(c2);
 		categoryDAO.create(c3);
-
+		System.out.println("---Creación de tres categorías\n" + categoryDAO.find());
+		
 		categoryDAO.delete(c2);
-
+		System.out.println("---Eliminación de categoría 2\n" + categoryDAO.find());
+		
 		c4 = categoryDAO.read(3);
 		c4.setDescription("Nueva...");
 		categoryDAO.update(c4);
+		System.out.println("---Actualización de categoría 3\n" + categoryDAO.find());
 
 		c5 = new Category(1, "uno", "Otro de nuevo");
 		categoryDAO.update(c5);
+		System.out.println("---Creación de categoría que ya existe\n" + categoryDAO.find());
 
 		categoryDAO.create(new Category(6, "seis", "Categoría seis"));
-		System.out.println(categoryDAO.find());
+		System.out.println("---Creación de categoría 6\n" + categoryDAO.find());
 	}
 }
