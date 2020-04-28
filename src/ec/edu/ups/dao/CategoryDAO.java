@@ -16,8 +16,12 @@ import ec.edu.ups.modelo.Category;
  * buscarCategoryPorDescription, entre otras.
  * 
  * @author Gabriel A. León Paredes.
- * 		   Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ * 
+ * @see GenericDAO
+ * @see Category
+ * @version 1.0
  *
  */
 public interface CategoryDAO extends GenericDAO<Category, Integer> {

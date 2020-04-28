@@ -17,6 +17,11 @@ import ec.edu.ups.modelo.UserDetail;
  * @author Gabriel A. León Paredes 
  * Doctor en Tecnologías de Información
  * https://www.linkedin.com/in/gabrielleonp
+ * 
+ * @see GenericDAO
+ * @see UserDetail
+ * 
+ * @version 1.0
  *
  */
 public interface UserDetailDAO extends GenericDAO<UserDetail, Integer> {

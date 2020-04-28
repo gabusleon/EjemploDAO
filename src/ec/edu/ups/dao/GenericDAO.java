@@ -12,12 +12,13 @@ import java.util.List;
  * DAO usando JDBC como coexión a la misma.
  * 
  * @author Gabriel A. León Paredes 
- * 		   Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
  *
  * @param <T>  la entidad o modelo que será persistida en la base de datos
  * @param <ID> el id o llave primaria por la cuál se identificara al modelo como
  *             valor único
+ * @version 1.0
  */
 public interface GenericDAO<T, ID> {
 

@@ -18,6 +18,11 @@ import ec.edu.ups.modelo.ShoppingBasket;
  * @author Gabriel A. León Paredes 
  * Doctor en Tecnologías de Información
  * https://www.linkedin.com/in/gabrielleonp
+ * 
+ * @see GenericDAO
+ * @see ShoppingBasket
+ * 
+ * @version 1.0
  *
  */
 public interface ShoppingBasketDAO extends GenericDAO<ShoppingBasket, Integer> {

@@ -16,8 +16,14 @@ import ec.edu.ups.modelo.Product;
  * Además, en esta interface se pueden agregar método específicos para el manejo
  * del objeto Product, por ejemplo: buscarProductPorDescripction entre otras.
  * 
- * @author Gabriel A. León Paredes Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ * 
+ * @see GenericDAO
+ * @see Product
+ * 
+ * @version 1.0
  *
  */
 public interface ProductDAO extends GenericDAO<Product, Integer> {
