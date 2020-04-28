@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author Gabriel A. León Paredes 
  * Doctor en Tecnologías de Información
  * https://www.linkedin.com/in/gabrielleonp
+ * 
  * @version 1.0
  */
 public class UserDetail implements Serializable {
