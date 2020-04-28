@@ -9,6 +9,26 @@ import ec.edu.ups.dao.UserDetailDAO;
 import ec.edu.ups.modelo.User;
 import ec.edu.ups.modelo.UserDetail;
 
+/**
+ * Clase JDBCUserDetailDAO.
+ * 
+ * La clase JDBCUserDetailDAO hereda los métodos y atributos de la clase abstracta
+ * padre JDBCGenericDAO, así como también, implementa los métodos de la
+ * interface UserDetailDAO.
+ * 
+ * Teniendo de esta manera una clase específica que gestionara la persistencia a
+ * la base de datos del modelo UserDetail
+ * 
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ *
+ * @see JDBCUserDetailDAO
+ * @see UserDetailDAO
+ * @see UserDetail
+ * 
+ * @version 1.0
+ */
 public class JDBCUserDetailDAO extends JDBCGenericDAO<UserDetail, Integer> implements UserDetailDAO {
 
 	@Override

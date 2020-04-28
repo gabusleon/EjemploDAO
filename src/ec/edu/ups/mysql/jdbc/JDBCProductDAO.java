@@ -13,6 +13,26 @@ import ec.edu.ups.dao.ProductDAO;
 import ec.edu.ups.modelo.Product;
 import ec.edu.ups.modelo.ShoppingBasket;
 
+/**
+ * Clase JDBCProductDAO.
+ * 
+ * La clase JDBCProductDAO hereda los métodos y atributos de la clase abstracta
+ * padre JDBCGenericDAO, así como también, implementa los métodos de la
+ * interface ProductDAO.
+ * 
+ * Teniendo de esta manera una clase específica que gestionara la persistencia a
+ * la base de datos del modelo Product
+ * 
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ *
+ * @see JDBCGenericDAO
+ * @see ProductDAO
+ * @see Product
+ * 
+ * @version 1.0
+ */
 public class JDBCProductDAO extends JDBCGenericDAO<Product, Integer> implements ProductDAO {
 
 	@Override

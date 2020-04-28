@@ -11,11 +11,15 @@ import java.sql.Statement;
  * 
  * Clase que permite obtener una conexión a la base de datos y asegura que si ya
  * existe una conexión no la vuelva a crear utilizando el patrón de diseño
- * Singleton. Ademásm crea los métodos para poder enviar sentencias SQL como
+ * Singleton. Además, implementa los métodos para poder enviar sentencias SQL como
  * INSERT, DELETE, UPDATE y SELECT.
  * 
- * @author Gabriel A. León Paredes Doctor en Tecnologías de Información
- *         https://www.linkedin.com/in/gabrielleonp
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ * 
+ * @see https://www.arquitecturajava.com/ejemplo-de-java-singleton-patrones-classloaders/
+ * @version 1.0
  *
  */
 public class ContextJDBC {

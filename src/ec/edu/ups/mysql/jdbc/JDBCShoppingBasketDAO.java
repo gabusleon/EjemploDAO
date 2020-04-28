@@ -16,6 +16,26 @@ import ec.edu.ups.dao.ShoppingBasketDAO;
 import ec.edu.ups.modelo.Product;
 import ec.edu.ups.modelo.ShoppingBasket;
 
+/**
+ * Clase JDBCShoppingBasketDAO.
+ * 
+ * La clase JDBCShoppingBasketDAO hereda los métodos y atributos de la clase abstracta
+ * padre JDBCGenericDAO, así como también, implementa los métodos de la
+ * interface ShoppingBasketDAO.
+ * 
+ * Teniendo de esta manera una clase específica que gestionara la persistencia a
+ * la base de datos del modelo ShoppingBasket
+ * 
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ *
+ * @see JDBCShoppingBasketDAO
+ * @see ShoppingBasketDAO
+ * @see ShoppingBasket
+ * 
+ * @version 1.0
+ */
 public class JDBCShoppingBasketDAO extends JDBCGenericDAO<ShoppingBasket, Integer> implements ShoppingBasketDAO {
 
 	@Override

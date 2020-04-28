@@ -8,6 +8,26 @@ import java.util.List;
 import ec.edu.ups.dao.CategoryDAO;
 import ec.edu.ups.modelo.Category;
 
+/**
+ * Clase JDBCCategoryDAO.
+ * 
+ * La clase JDBCCategoryDAO hereda los métodos y atributos de la clase abstracta
+ * padre JDBCGenericDAO, así como también, implementa los métodos de la
+ * interface CategoryDAO.
+ * 
+ * Teniendo de esta manera una clase específica que gestionara la persistencia a
+ * la base de datos del modelo Category
+ * 
+ * @author Gabriel A. León Paredes 
+ * Doctor en Tecnologías de Información
+ * https://www.linkedin.com/in/gabrielleonp
+ *
+ * @see JDBCGenericDAO
+ * @see CategoryDAO
+ * @see Category
+ * 
+ * @version 1.0
+ */
 public class JDBCCategoryDAO extends JDBCGenericDAO<Category, Integer> implements CategoryDAO {
 
 	@Override
